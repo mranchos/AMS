@@ -1,0 +1,90 @@
+<?php
+
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
+
+Route::get('/macro/create', 'RegulacionController@create')->name('macro')->middleware('auth');
+Route::post('/macro/store', 'RegulacionController@store' )->name('macro')->middleware('auth');
+Route::delete('/macro/destroy/{id}', 'RegulacionController@destroy')->name('macro')->middleware('auth');
+
+Route::get('/requi/{id}', 'RequisitoController@index_all')->name('requi')->middleware('auth');
+Route::get('/requi/create/{id}', 'RequisitoController@create')->name('requi')->middleware('auth');
+Route::post('/requi/create/store', 'RequisitoController@store' )->name('requi')->middleware('auth');
+Route::get('/requi/destroy/{id}', 'RequisitoController@destroy')->name('requi')->middleware('auth');
+
+Route::get('/enti/create', 'EntidadController@create')->name('enti')->middleware('auth');
+Route::post('/enti/store', 'EntidadController@store' )->name('enti')->middleware('auth');
+Route::get('/enti/destroy/{id}', 'EntidadController@destroy')->name('enti')->middleware('auth');
+
+Route::get('/perso/{id}', 'PersonaController@index_all')->name('perso')->middleware('auth');
+Route::get('/perso/create/{id}', 'PersonaController@create')->name('perso')->middleware('auth');
+Route::post('/perso/create/store', 'PersonaController@store' )->name('perso')->middleware('auth');
+Route::get('/perso/destroy/{id}', 'PersonaController@destroy')->name('perso')->middleware('auth');
+
+Route::group(['middleware' => 'auth'], function () {
+
+//	Route::get('macro', function () {
+//		return view('pages.macro');
+//	})->name('macro');
+
+	Route::get('macro','RegulacionController@index')->name('macro');
+	Route::get('requi','RequisitoController@index_blank')->name('requi');
+	Route::get('enti','EntidadController@index')->name('enti');
+	Route::get('perso','PersonaController@index')->name('perso');
+	Route::get('ctr','ControlController@index')->name('ctr');
+
+	Route::get('table-list', function () {
+		return view('pages.table_list');
+	})->name('table');
+
+	Route::get('typography', function () {
+		return view('pages.typography');
+	})->name('typography');
+
+	Route::get('icons', function () {
+		return view('pages.icons');
+	})->name('icons');
+
+	Route::get('map', function () {
+		return view('pages.map');
+	})->name('map');
+
+	Route::get('notifications', function () {
+		return view('pages.notifications');
+	})->name('notifications');
+
+	Route::get('rtl-support', function () {
+		return view('pages.language');
+	})->name('language');
+
+	Route::get('upgrade', function () {
+		return view('pages.upgrade');
+	})->name('upgrade');
+});
+
+Route::group(['middleware' => 'auth'], function () {
+	Route::resource('user', 'UserController', ['except' => ['show']]);
+	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
+	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
+});
+
