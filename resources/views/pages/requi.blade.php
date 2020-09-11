@@ -36,20 +36,46 @@
 
           <div class="d-flex justify-content-around">
            
-          @foreach($requisito as $requi)
-          <div class="card" style="width: 20rem;">
-            <div class="card-body">
-              <h4 class="card-title">{{$requi->item}}</h4>
-              <h6 class="card-subtitle mb-2 text-muted">{{$requi->name}}</h6>
-              <p class="card-text">{{$requi->description}}</p>
-              <a href="destroy/{{$requi->id}}" class="card-link">Eliminar</a>
-              <a href="#" class="card-link">Editar</a>
-              <!-- 
-              <a href="#" class="card-link">Crear control</a>
-              -->
-            </div>
-          </div>  
-          @endforeach
+          
+          <div class="row">
+            
+            @foreach($requisito as $requi)
+            
+              <div class="card bg-success">
+                  <div class="card-body ">
+                        <h4 class="card-category">
+                            <i class="material-icons">code</i> {{$requi->item}}
+                        </h4>
+                        <h2 class="card-title">
+                           {{$requi->name}}
+                        </h2>
+                          {{$requi->description}}
+                  </div>
+                  <div class="card-footer ">
+                            <div class="author">
+                                <a href="destroy/{{$requi->id}}">
+                                      <span>Eliminar</span>
+                                </a>  
+                            </div>
+
+                            <a href="cone/regu/requi/create/{{$requi->id}}">
+                                       <i class="material-icons" class="text-danger">extension</i> Crear proceso
+                            </a> 
+                            
+                            <!--
+                           <div class="stats ml-auto">
+                                 <a href="#">
+                                       <i class="material-icons" class="text-danger">extension</i> Crear proceso
+                                </a>
+                           </div>
+                            -->
+                  </div>
+              </div>
+
+             @endforeach
+             
+             </div>
+
           
           </div>
 

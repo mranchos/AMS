@@ -31,14 +31,14 @@
                               <img src="https://www.solidbackgrounds.com/images/2560x1440/2560x1440-golden-yellow-solid-color-background.jpg" alt="..." class="avatar img-raised">
                               <span>Impacto Medio</span>
                            @else 
-                              <img src="https://controlserviceltda.com/wp-content/uploads/2018/06/CtrSrv-Banner-Layer-Fondo-Rojo.jpg" alt="..." class="avatar img-raised">
+                              <img src="https://biblioteca.acropolis.org/wp-content/uploads/2014/12/rojo-1200x839.png" alt="..." class="avatar img-raised">
                               <span>Impacto Alto</span>
                            @endif
 
-                    </div>
+                   </div>
                    <div class="stats ml-auto">
                         <i class="material-icons">access_time</i> {{$ctr->lastupdate}}
-                    </div>
+                   </div>
           </div>
         </div>
         @endforeach

@@ -30,6 +30,8 @@ Route::get('/requi/{id}', 'RequisitoController@index_all')->name('requi')->middl
 Route::get('/requi/create/{id}', 'RequisitoController@create')->name('requi')->middleware('auth');
 Route::post('/requi/create/store', 'RequisitoController@store' )->name('requi')->middleware('auth');
 Route::get('/requi/destroy/{id}', 'RequisitoController@destroy')->name('requi')->middleware('auth');
+Route::get('requi/cone/regu/requi/create/{id}', 'ConexionController@create')->name('cone')->middleware('auth');
+Route::post('requi/cone/regu/requi/create/store', 'ConexionController@store' )->name('cone')->middleware('auth');
 
 Route::get('/enti/create', 'EntidadController@create')->name('enti')->middleware('auth');
 Route::post('/enti/store', 'EntidadController@store' )->name('enti')->middleware('auth');
@@ -39,6 +41,20 @@ Route::get('/perso/{id}', 'PersonaController@index_all')->name('perso')->middlew
 Route::get('/perso/create/{id}', 'PersonaController@create')->name('perso')->middleware('auth');
 Route::post('/perso/create/store', 'PersonaController@store' )->name('perso')->middleware('auth');
 Route::get('/perso/destroy/{id}', 'PersonaController@destroy')->name('perso')->middleware('auth');
+
+
+Route::get('/cone/regu/{id}', 'ConexionController@index_requi')->name('cone')->middleware('auth');
+Route::get('/cone/regu/requi/{id}', 'ConexionController@index')->name('cone')->middleware('auth');
+Route::get('/cone/regu/requi/create/{id}', 'ConexionController@create')->name('cone')->middleware('auth');
+Route::post('/cone/regu/requi/create/store', 'ConexionController@store' )->name('cone')->middleware('auth');
+Route::get('/cone/regu/requi/destroy/{id}', 'ConexionController@destroy')->name('cone')->middleware('auth');
+
+
+Route::get('/eva/create', 'EvaluacionController@create')->name('eva')->middleware('auth');
+Route::get('/eva/destroy/{id}', 'EvaluacionController@destroy')->name('eva')->middleware('auth');
+Route::post('/eva/store', 'EvaluacionController@store' )->name('eva')->middleware('auth');
+Route::get('/eva/ejecucion/{id}', 'EvaluacionController@ejecucion' )->name('eva')->middleware('auth');
+Route::post('/eva/ejecucion/send', 'EvaluacionController@send' )->name('eva')->middleware('auth');
 
 Route::group(['middleware' => 'auth'], function () {
 
@@ -51,6 +67,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('enti','EntidadController@index')->name('enti');
 	Route::get('perso','PersonaController@index')->name('perso');
 	Route::get('ctr','ControlController@index')->name('ctr');
+	Route::get('cone','ConexionController@index_regu')->name('cone');
+	Route::get('eva','EvaluacionController@index')->name('eva');
 
 	Route::get('table-list', function () {
 		return view('pages.table_list');

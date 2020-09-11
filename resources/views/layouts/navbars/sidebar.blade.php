@@ -60,6 +60,31 @@
         </a>
       </li>
 
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#proc" aria-expanded="false">
+          <i class="material-icons">api</i>
+          <p>{{ __('Procesos') }}
+            <b class="caret"></b>
+          </p>
+        </a>
+        <div class="collapse show" id="proc">
+          <ul class="nav">
+             <li class="nav-item {{ $activePage == 'cone' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('cone') }}">
+                 <i class="material-icons">extension</i>
+                <span class="sidebar-normal">{{ __('Conexion') }} </span>
+              </a>
+            </li>
+            <li class="nav-item {{ $activePage == 'eva' ? ' active' : '' }}">
+              <a class="nav-link" href="{{ route('eva') }}">
+                <i class="material-icons">flaky</i>
+                <span class="sidebar-normal"> {{ __('Evaluacion') }} </span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
       <li class="nav-item{{ $activePage == 'ctr' ? ' active' : '' }}">
         <a class="nav-link" href="{{ route('ctr') }}">
           <i class="material-icons">games</i>
