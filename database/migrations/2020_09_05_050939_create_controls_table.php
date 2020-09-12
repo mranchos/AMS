@@ -20,6 +20,7 @@ class CreateControlsTable extends Migration
             $table->text('description');
             $table->string('resourses');
             $table->string('budget');
+            $table->string('hours');
             $table->string('lastupdate');
             $table->integer('impact');
             $table->timestamps();

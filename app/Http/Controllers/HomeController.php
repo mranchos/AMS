@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 class HomeController extends Controller
 {
     /**
@@ -20,7 +21,8 @@ class HomeController extends Controller
      * @return \Illuminate\View\View
      */
     public function index()
-    {
-        return view('dashboard');
+    {   
+        $dash = DB::table('dashboard')->first();
+        return view('dashboard',['dash'=>$dash]);
     }
 }

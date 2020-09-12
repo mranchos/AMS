@@ -4,9 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Control;
+use App\Ejecucion;
+use App\Evaluacion;
+use App\Accion;
 
+use App\Persona;
+use DB;
 
-class ControlController extends Controller
+class AccionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +20,8 @@ class ControlController extends Controller
      */
     public function index()
     {
-        return view('pages.ctr',['controles' => Control::all()]);
+        $oportunidades = DB::table('oportunidades')->get();
+        return view('pages.acc',['oportunidades'=>$oportunidades]);
     }
 
     /**
@@ -23,9 +29,14 @@ class ControlController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('pages.ctr_create');
+        $ejecucionid = $id; 
+        $controles = Control::all();
+        $ejecucion = Ejecucion::findOrFail($id);
+        $evaluacion = Evaluacion::findOrFail($ejecucion->evaluacionid);
+        $personas = Persona::where('entidadid','=',$evaluacion->entidadid)->get();
+        return view('pages.acc_create',compact('ejecucionid','controles','personas'));
     }
 
     /**
@@ -36,19 +47,17 @@ class ControlController extends Controller
      */
     public function store(Request $request)
     {
-        $control = new Control();
+        $accion = new Accion();
 
-        $control->code = request('code');
-        $control->name = request('name');
-        $control->description = request('description');
-        $control->resourses = request('resourses');
-        $control->budget = request('budget');
-        $control->hours = request('hours');
-        $control->lastupdate = request('lastupdate');
-        $control->impact = request('impact');
-        $control->save();
+        $accion->ejecucionid = request('ejecucionid');
+        $accion->personaid = request('personaid');
+        $accion->controlid = request('controlid');
+        $accion->fec_ini = request('fec_ini');
+        $accion->fec_fin = request('fec_fin');
+        $accion->estado = request('estado');
+        $accion->save();
 
-        return redirect('ctr');
+        return redirect('/acc');
     }
 
     /**
@@ -59,8 +68,17 @@ class ControlController extends Controller
      */
     public function show($id)
     {
-        //
+        $plan = DB::table('plan')->where('id','=',$id)->first();
+        return view('pages.showplan',compact('plan'));
     }
+
+    public function finish($id)
+    {
+        $plan = DB::table('plan')->where('id','=',$id)->first();
+        DB::table('ejecucions')->where('id',$plan->ejecucionid)->update(['madurez'=>'3']);
+        return redirect('/acc');
+    }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -72,6 +90,10 @@ class ControlController extends Controller
     {
         //
     }
+
+
+
+    
 
     /**
      * Update the specified resource in storage.
@@ -93,9 +115,6 @@ class ControlController extends Controller
      */
     public function destroy($id)
     {
-        $control = Control::findOrFail($id);
-        $control->delete();
-
-        return redirect('/ctr');
+        //
     }
 }

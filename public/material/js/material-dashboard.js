@@ -188,9 +188,9 @@ md = {
       /* ----------==========     Daily Sales Chart initialization For Documentation    ==========---------- */
 
       dataDailySalesChart = {
-        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        labels: ['L', 'M', 'M', 'J', 'V', 'S', 'D'],
         series: [
-          [12, 17, 7, 17, 23, 18, 38]
+          [0, 0, 0, 0, 16, 0, 0]
         ]
       };
 

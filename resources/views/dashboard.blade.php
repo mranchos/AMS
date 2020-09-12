@@ -4,19 +4,19 @@
   <div class="content">
     <div class="container-fluid">
       <div class="row">
+        
         <div class="col-lg-3 col-md-6 col-sm-6">
           <div class="card card-stats">
             <div class="card-header card-header-warning card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">add_task</i>
+                <i class="material-icons">gavel</i>
               </div>
-              <p class="card-category">Entidades en cumplimiento</p>
-              <h3 class="card-title">1/4</h3>
+              <p class="card-category">Regulaciones</p>
+              <h3 class="card-title">{{$dash->regulaciones}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
                 <i class="material-icons">access_time</i> actualizado ahora 
-                
               </div>
             </div>
           </div>
@@ -25,14 +25,14 @@
           <div class="card card-stats">
             <div class="card-header card-header-success card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">store</i>
+                <i class="material-icons">list</i>
               </div>
-              <p class="card-category">Presupuesto promedio por control</p>
-              <h3 class="card-title">$1,500</h3>
+              <p class="card-category">Requisitos</p>
+              <h3 class="card-title">{{$dash->requisitos}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
-                <i class="material-icons">date_range</i> Ultimas 24 horas
+                <i class="material-icons">access_time</i> actualizado ahora
               </div>
             </div>
           </div>
@@ -41,10 +41,10 @@
           <div class="card card-stats">
             <div class="card-header card-header-danger card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">backup_table</i>
+                <i class="material-icons">account_balance</i>
               </div>
-              <p class="card-category">Requisitos definidos</p>
-              <h3 class="card-title">16</h3>
+              <p class="card-category">Entidades</p>
+              <h3 class="card-title">{{$dash->entidades}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">
@@ -57,10 +57,10 @@
           <div class="card card-stats">
             <div class="card-header card-header-info card-header-icon">
               <div class="card-icon">
-                <i class="material-icons">grade</i>
+                <i class="material-icons">flaky</i>
               </div>
-              <p class="card-category">Planes ejecutados</p>
-              <h3 class="card-title">+245</h3>
+              <p class="card-category">Evaluaciones</p>
+              <h3 class="card-title">+{{$dash->evaluaciones}}</h3>
             </div>
             <div class="card-footer">
               <div class="stats">

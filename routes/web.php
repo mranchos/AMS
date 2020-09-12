@@ -56,6 +56,17 @@ Route::post('/eva/store', 'EvaluacionController@store' )->name('eva')->middlewar
 Route::get('/eva/ejecucion/{id}', 'EvaluacionController@ejecucion' )->name('eva')->middleware('auth');
 Route::post('/eva/ejecucion/send', 'EvaluacionController@send' )->name('eva')->middleware('auth');
 
+Route::get('/indi/{id}', 'IndicadorController@show')->name('indi')->middleware('auth');
+
+Route::get('/ctr/destroy/{id}', 'ControlController@destroy')->name('ctr')->middleware('auth');
+Route::get('/ctr/create', 'ControlController@create')->name('ctr')->middleware('auth');
+Route::post('/ctr/store', 'ControlController@store' )->name('ctr')->middleware('auth');
+
+Route::get('/acc/{id}', 'AccionController@create')->name('acc')->middleware('auth');
+Route::post('/acc/store', 'AccionController@store' )->name('acc')->middleware('auth');
+Route::get('/show/{id}', 'AccionController@show')->name('acc')->middleware('auth');
+Route::get('/show/finish/{id}', 'AccionController@finish')->name('acc')->middleware('auth');
+
 Route::group(['middleware' => 'auth'], function () {
 
 //	Route::get('macro', function () {
@@ -69,6 +80,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('ctr','ControlController@index')->name('ctr');
 	Route::get('cone','ConexionController@index_regu')->name('cone');
 	Route::get('eva','EvaluacionController@index')->name('eva');
+	Route::get('indi','IndicadorController@index')->name('indi');
+	Route::get('acc','AccionController@index')->name('acc');
 
 	Route::get('table-list', function () {
 		return view('pages.table_list');

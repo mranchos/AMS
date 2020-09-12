@@ -155,8 +155,9 @@ class EvaluacionController extends Controller
     public function destroy($id)
     {
         $eva = Evaluacion::findOrFail($id);
-    
         $eva->delete();
+
+        Ejecucion::where('evaluacionid','=',$id)->delete();
 
         return redirect('/eva');
     }

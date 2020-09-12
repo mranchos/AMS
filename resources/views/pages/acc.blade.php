@@ -1,4 +1,4 @@
-@extends('layouts.app', ['activePage' => 'eva', 'titlePage' => __('Evaluacion')])
+@extends('layouts.app', ['activePage' => 'acc', 'titlePage' => __('Plan de accion')])
 
 @section('content')
 
@@ -7,34 +7,32 @@
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-warning">
-            <h3 class="card-title ">Listado de evaluaciones</h3>
-            <p class="card-category"> En esta sección se listan las evaluaciones del sistema.</p>
+          <div class="card-header card-header-primary">
+            <h3 class="card-title ">Definición de areas de oportunidad</h3>
+            <p class="card-category"> En esta sección se listan las areas de oportunidad para mejora.</p>
           </div>
           <div class="card-body">
 
-            <div class="col-12 text-right">
-            <a href="eva/create">
-                  <button class="btn btn-success btn-round"> 
-                    <i class="material-icons">queue</i>  
-                  </button>
-            </a>  
-            </div>
-
             <div class="table-responsive">
               <table class="table">
-                <thead class=" text-warning">
+                <thead class=" text-primary">
                   <th>
-                    ID
-                  </th>
-                  <th>
-                    Entidad
+                    Evaluacion ID
                   </th>
                   <th>
                     Regulacion
                   </th>
                   <th>
-                    Completado
+                    Entidad
+                  </th>
+                  <th>
+                    Item
+                  </th>
+                  <th>
+                    Proceso
+                  </th>
+                  <th>
+                    Madurez 
                   </th>
                   <th>
                     Acciones
@@ -42,40 +40,46 @@
                 </thead>
                 <tbody>
 
-                  @foreach($datos as $da)
+                  @foreach($oportunidades as $op)
                   <tr>
                     <td>
-                      {{$da->id}}
+                      {{$op->evaluacion}}
                     </td>
                     <td>
-                      {{$da->entidad}}
+                      {{$op->regulacion}}
                     </td>
                     <td>
-                      {{$da->regulacion}}
+                      {{$op->entidad}}
                     </td>
                     <td>
-                      {{$da->porcentaje}} %
+                      {{$op->requisito}}
                     </td>
                     <td>
-                         
-                            <a href="eva/destroy/{{$da->id}}">
-                            <button class="btn btn-danger btn-round btn-sm"> 
-                              <i class="material-icons">delete_forever</i>    
-                            </button>
-                            </a>
-                          
-                    
-                            <button class="btn btn-info btn-round btn-sm"> 
-                              <i class="material-icons">rule</i>  
-                            </button>
+                      {{$op->pregunta}}
+                    </td>
+                    <td>
+                      {{$op->madurez}}
+                    </td>
 
-                            @if ($da->porcentaje === 100)
+                    <td>
+                             
+                             @if ($op->accion == 0)
+                                <a href="acc/{{$op->ejecucion}}">
+                                <button class="btn btn-success btn-round btn-sm"> 
+                                  <i class="material-icons">queue</i>  
+                                </button>
+                                </a>
+
                                 <button class="btn btn-default btn-round btn-sm"> 
                                 <i class="material-icons">launch</i>  
                                 </button>
 
                             @else 
-                                <a href="eva/ejecucion/{{$da->id}}">
+                                <button class="btn btn-default btn-round btn-sm"> 
+                                <i class="material-icons">queue</i>  
+                                </button>
+
+                                <a href="show/{{$op->accion}}">
                                 <button class="btn btn-primary btn-round btn-sm"> 
                                   <i class="material-icons">launch</i>  
                                 </button>
